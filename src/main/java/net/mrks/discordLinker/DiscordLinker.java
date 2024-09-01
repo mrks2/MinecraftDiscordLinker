@@ -1,6 +1,7 @@
 package net.mrks.discordLinker;
 
 import net.mrks.discordLinker.bot.DiscordBot;
+import net.mrks.discordLinker.minecraft.events.PlayerChatListener;
 import org.bukkit.plugin.java.JavaPlugin;
 import net.mrks.discordLinker.bot.DiscordBotConfig;
 
@@ -10,14 +11,15 @@ public final class DiscordLinker extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-        DiscordBotConfig config = new DiscordBotConfig("MTI3OTQyMjY2ODc3MjQ3OTAxNg.GCS-oq.6un4V49DSD2NPs6xhQwNqVvDzCrUK8ca64AAnM", "732648510037426228", List.of("1279576841849405593"), List.of("1279576841849405593"), "1279576841849405593");
+        DiscordBotConfig config = new DiscordBotConfig("TOKEN", "732648510037426228", List.of("1279576841849405593"), List.of("1279576841849405593"), "760844498019549204");
         DiscordBot bot = new DiscordBot(config);
         try {
             bot.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        getServer().getPluginManager().registerEvents(new PlayerChatListener(bot), this);
     }
 
     @Override
